@@ -76,7 +76,7 @@ def GetEndTime(logType):
     if logType == "calendar":
         end_time = (end_time - timedelta(hours=int(calendarFetchDelay)))
     if logType == "chat":
-        logging.info("Chat Fecth Delay value - {}".format(int(chatFetchDelay)))
+        logging.info("Chat Fetch Delay value - {}".format(int(chatFetchDelay)))
         end_time = (end_time - timedelta(days=int(chatFetchDelay)))
     if logType == "user_accounts":
         end_time = (end_time - timedelta(hours=int(userAccountsFetchDelay)))
@@ -123,8 +123,8 @@ def GetDates(logType):
                 activity_list[activity] = newtime
             activity_list = json.dumps(activity_list)
     else:
-        logging.info("There is no last time point, trying to get events for last one day.")
-        past_time = (end_time - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        logging.info("There is no last time point, trying to get events for last ten minutes.")
+        past_time = (end_time - timedelta(minutes=10)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         for activity in activities:
             activity_list[activity] = past_time[:-4] + 'Z'
         activity_list = json.dumps(activity_list)
