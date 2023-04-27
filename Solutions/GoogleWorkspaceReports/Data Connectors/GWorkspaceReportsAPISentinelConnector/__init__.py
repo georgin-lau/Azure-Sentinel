@@ -30,8 +30,8 @@ connection_string = os.environ['AzureWebJobsStorage']
 logAnalyticsUri = os.environ.get('logAnalyticsUri')
 SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly']
 activities = [
-  #          "access_transparency", 
-  #          "admin",
+            "access_transparency", 
+            "admin",
   #          "calendar",
   #          "chat",
             "drive",
@@ -123,8 +123,8 @@ def GetDates(logType):
                 activity_list[activity] = newtime
             activity_list = json.dumps(activity_list)
     else:
-        logging.info("There is no last time point, trying to get events for last ten minutes.")
-        past_time = (end_time - timedelta(minutes=10)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        logging.info("There is no last time point, trying to get events for last one minutes.")
+        past_time = (end_time - timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         for activity in activities:
             activity_list[activity] = past_time[:-4] + 'Z'
         activity_list = json.dumps(activity_list)
