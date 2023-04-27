@@ -32,16 +32,16 @@ SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly']
 activities = [
             "access_transparency", 
             "admin",
-            "calendar",
-            "chat",
+  #          "calendar",
+  #          "chat",
             "drive",
             "gcp",
-            "gplus",
-            "groups",
+  #          "gplus",
+  #          "groups",
             "groups_enterprise",
-            "jamboard", 
+  #          "jamboard", 
             "login", 
-            "meet", 
+  #          "meet", 
             "mobile", 
             "rules", 
             "saml", 
@@ -49,7 +49,7 @@ activities = [
             "user_accounts", 
             "context_aware_access", 
             "chrome", 
-            "data_studio"
+  #          "data_studio"
             ]
 
 if ((logAnalyticsUri in (None, '') or str(logAnalyticsUri).isspace())):
