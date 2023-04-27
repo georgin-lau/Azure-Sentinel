@@ -30,15 +30,15 @@ connection_string = os.environ['AzureWebJobsStorage']
 logAnalyticsUri = os.environ.get('logAnalyticsUri')
 SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly']
 activities = [
-            "access_transparency", 
-            "admin",
+  #          "access_transparency", 
+  #          "admin",
   #          "calendar",
   #          "chat",
             "drive",
-            "gcp",
+  #          "gcp",
   #          "gplus",
   #          "groups",
-            "groups_enterprise",
+  #          "groups_enterprise",
   #          "jamboard", 
             "login", 
   #          "meet", 
