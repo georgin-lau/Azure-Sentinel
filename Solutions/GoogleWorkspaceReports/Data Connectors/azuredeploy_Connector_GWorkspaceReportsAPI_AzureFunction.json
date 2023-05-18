@@ -150,7 +150,8 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', tolower(variables('FunctionName')))]",
-        "[resourceId('Microsoft.Insights/components', variables('FunctionName'))]"
+        "[resourceId('Microsoft.Insights/components', variables('FunctionName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
       ],
       "kind": "functionapp,linux",
       "identity": {
@@ -189,7 +190,7 @@
             "WorkspaceKey": "[parameters('WorkspaceKey')]",
             "GooglePickleString": "[parameters('GooglePickleString')]",
             "logAnalyticsUri": "[variables('LogAnaltyicsUri')]",
-            "WEBSITE_RUN_FROM_PACKAGE": "https://github.com/Azure/Azure-Sentinel/blob/v-sabiraj-testfunctionapp/Solutions/GoogleWorkspaceReports/Data%20Connectors/GWorkspaceReportsAPISentinelConn.zip?raw=true"
+            "WEBSITE_RUN_FROM_PACKAGE": "https://github.com/georgin-lau/Azure-Sentinel/blob/master/Solutions/GoogleWorkspaceReports/Data%20Connectors/GWorkspaceReportsAPISentinelConn.zip?raw=true"
           }
         }
       ]
@@ -228,6 +229,22 @@
       ],
       "properties": {
         "shareQuota": 5120
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2022-03-01",
+      "name": "[parameters('hostingPlanName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "EP1",
+        "tier": "ElasticPremium",
+        "family": "EP"
+      },
+      "kind": "elastic",
+      "properties": {
+        "maximumElasticWorkerCount": 20,
+        "reserved": true
       }
     }
   ]
