@@ -54,13 +54,6 @@
       "metadata": {
         "description": "Provision for customer to delay data fetching to prevent data loss due to delays at source. Default value is provide as 6 hours"
       }
-    },
-    "hostingPlanName": {
-      "type": "string",
-      "defaultValue": "FunctionAppHostingPlanPremiumElastic",
-      "metadata": {
-          "description": "Hosting plan for function app. Default value is Premium as Consumption plan results in timeout and incomplete retrieval due to 10 min timeout."
-      }
     }
   },
   "variables": {
@@ -170,7 +163,6 @@
         "clientAffinityEnabled": true,
         "alwaysOn": true,
         "reserved": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
         "siteConfig": {
           "linuxFxVersion": "python|3.8"
         }
@@ -240,14 +232,10 @@
       }
     },
     {
-      "name": "[parameters('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
-      "location": "[resourceGroup().location]",
       "apiVersion": "2022-03-01",
-      "dependsOn": [],
-      "tags": {
-          "displayName": "Function App Plan"
-      },
+      "name": "[parameters('hostingPlanName')]",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "EP1",
         "tier": "ElasticPremium",
@@ -255,9 +243,8 @@
       },
       "kind": "elastic",
       "properties": {
-          "name": "[parameters('hostingPlanName')]",
-          "maximumElasticWorkerCount": 20,
-          "reserved": true
+        "maximumElasticWorkerCount": 20,
+        "reserved": true
       }
     }
   ]
